@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Self-host open models or pay the API? Calculator (pre-order)</title><meta name="description" content="Simple estimate plus pre-order kit for self-host vs API decisions. Kit not built yet.">
+<style>body{font-family:system-ui,sans-serif;max-width:680px;margin:0 auto;padding:32px 20px;line-height:1.6;color:#1a1a1a}
+.badge{display:inline-block;background:#fff3cd;border:1px solid #e0c060;padding:4px 10px;border-radius:6px;font-size:.9em}
+h1{line-height:1.2}ul{padding-left:20px}.price{font-size:1.6em;font-weight:700}
+.box{background:#f5f5f7;padding:20px;border-radius:10px;margin:24px 0}
+input,button,.buy{font-size:1em;padding:10px;border-radius:6px;border:1px solid #ccc;width:100%;box-sizing:border-box;margin-top:8px;display:block;text-align:center}
+button,.buy{background:#111;color:#fff;border:0;cursor:pointer;text-decoration:none}small{color:#555}
+table{width:100%;border-collapse:collapse}td{padding:4px}code{background:#eee;padding:2px 4px;border-radius:4px}</style></head><body>
+<span class="badge">Pre-order: this product does not exist yet</span>
+<h1>Self-host open models or pay the API? Calculator</h1>
+<p>Teams are asking if running an open model on their own GPUs beats paying per token. The answer depends on your numbers. Try the simple estimate below, then pre-order the full kit.</p>
+<p>The full kit will include:</p><ul>
+<li><b>Break-even spreadsheet:</b> GPU vs API, by team size and tokens per month.</li>
+<li><b>Sizing guide:</b> how many GPUs a given load roughly needs, with the assumptions written out.</li>
+<li><b>Pilot plan:</b> steps to test an open model with a small group before deciding.</li>
+<li><b>Checklist:</b> compliance, data residency and when to keep a paid API as the exception.</li></ul>
+<div class="box">
+<p><b>Pre-order now: <span class="price">US$ 29</span></b><br>
+<small>The product is not built yet. Estimated delivery: by November 20, 2026, by email to the address you use at checkout. If it is not delivered by then, you get a full refund. You can also ask for a full refund any time before delivery at <a href="mailto:renandlsantos.ai@gmail.com">renandlsantos.ai@gmail.com</a>.</small></p>
+<a class="buy" href="https://buy.stripe.com/8x27sLb3zfBx76j1V80RG08">Pre-order for US$ 29</a>
+</div>
+<form class="box" id="wl">
+<p><b>Not ready to pay? Join the free waitlist.</b></p>
+<label for="email">Your email</label>
+<input id="email" type="email" required placeholder="you@example.com">
+<button type="submit">Join the waitlist</button>
+<small>This opens your email app with a prefilled message to renandlsantos.ai@gmail.com. Your signup counts when you press send. Joining does not commit you to buy.</small>
+</form>
+<div class="box"><p><b>Free quick estimate</b> <small>(rough estimate only, not a quote)</small></p>
+<p><small>Default values are placeholders, not real data. Replace them with your own.</small></p>
+<table>
+<tr><td>Developers</td><td><input id="d" type="number" value="50"></td></tr>
+<tr><td>Million tokens per dev per month</td><td><input id="t" type="number" value="20"></td></tr>
+<tr><td>API price, US$ per million tokens (blended)</td><td><input id="p" type="number" value="5" step="0.1"></td></tr>
+<tr><td>GPUs needed</td><td><input id="g" type="number" value="8"></td></tr>
+<tr><td>GPU cost, US$ per GPU per hour</td><td><input id="h" type="number" value="3" step="0.1"></td></tr>
+<tr><td>Ops hours per month to run it</td><td><input id="o" type="number" value="20"></td></tr>
+<tr><td>Ops cost, US$ per hour</td><td><input id="r" type="number" value="100"></td></tr>
+</table>
+<p>API per month: <b id="api"></b><br>Self-host per month: <b id="self"></b><br><span id="v"></span></p>
+<p><small>Formulas:<br><code>API = devs x tokens per dev x price per million</code><br><code>Self-host = GPUs x GPU hourly cost x 730 hours + ops hours x ops cost</code><br>Not included: setup time, quality differences between models, peak load, storage, network, discounts, compliance work. Real costs can be very different.</small></p></div>
+<script>
+function f(i){return parseFloat(document.getElementById(i).value)||0}
+function u(n){return 'US$ '+Math.round(n).toLocaleString('en-US')}
+function c(){var a=f('d')*f('t')*f('p'),s=f('g')*f('h')*730+f('o')*f('r');
+document.getElementById('api').textContent=u(a);document.getElementById('self').textContent=u(s);
+document.getElementById('v').textContent=a>s?'With these inputs, self-host looks cheaper by about '+u(a-s)+' per month (estimate).':'With these inputs, the API looks cheaper by about '+u(s-a)+' per month (estimate).';}
+document.querySelectorAll('input[type=number]').forEach(function(x){x.addEventListener('input',c)});c();
+</script>
+<p><small>Questions: <a href="mailto:renandlsantos.ai@gmail.com">renandlsantos.ai@gmail.com</a>. Independent project, not affiliated with any AI vendor. Nothing here is financial advice and no savings are guaranteed.</small></p>
+<script>
+document.getElementById('wl').addEventListener('submit',function(e){e.preventDefault();
+var m=document.getElementById('email').value.trim();
+location.href='mailto:renandlsantos.ai@gmail.com?subject='+encodeURIComponent('Self-host Calculator Kit waitlist')+'&body='+encodeURIComponent('Please add me to the Self-host Calculator Kit waitlist.\nEmail: '+m+'\nPage: '+location.href);});
+</script></body></html>
